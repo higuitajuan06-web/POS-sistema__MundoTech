@@ -1,9 +1,9 @@
 {
-  "version": "1.0.1",
-  "fecha": "2026-09-26",
-  "notas": "Versión de prueba del sistema de actualizaciones. Sistema completo con ventas, citas, comisiones, bodega, gastos y galería.",
+  "version": "1.0.0",
+  "fecha": "2026-09-25",
+  "notas": "Versión inicial del sistema POS Mundo Tech. Sistema completo con ventas, citas, comisiones, bodega, gastos y galería.",
   "requisitos": {
     "minima": "1.0.0",
-    "recomendada": "1.0.1"
+    "recomendada": "1.0.0"
   }
 }
