@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Licencia Inválida - Mundo Tech</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <style>
+    .license-block-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+    }
+
+    .license-block-card {
+      background: white;
+      border-radius: 16px;
+      padding: 48px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .license-block-icon {
+      font-size: 64px;
+      color: #dc3545;
+      margin-bottom: 24px;
+    }
+
+    .license-block-title {
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 16px;
+    }
+
+    .license-block-message {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .license-block-details {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .license-block-details p {
+      margin: 8px 0;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .license-block-details strong {
+      color: #333;
+    }
+
+    .license-block-contact {
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="license-block-container">
+    <div class="license-block-card">
+      <i class="bi bi-shield-lock-fill license-block-icon"></i>
+      <h1 class="license-block-title">Licencia Inválida o Vencida</h1>
+      <p class="license-block-message" id="licenseMessage">
+        La licencia del sistema POS Mundo Tech no es válida o ha expirado.
+      </p>
+      <div class="license-block-details" id="licenseDetails" style="display: none;">
+        <p><strong>Cliente:</strong> <span id="licenseClient">-</span></p>
+        <p><strong>Fecha de expiración:</strong> <span id="licenseExpiry">-</span></p>
+        <p><strong>Estado:</strong> <span id="licenseStatus">-</span></p>
+      </div>
+      <p class="license-block-contact">
+        Contacta a Mundo Tech para renovar tu licencia.<br>
+        📧 soporte@mundotech.com
+      </p>
+    </div>
+  </div>
+  <script>
+    // Obtener información de la licencia desde el backend
+    fetch('/api/licencia/info')
+      .then(response => response.json())
+      .then(data => {
+        const messageEl = document.getElementById('licenseMessage');
+        const detailsEl = document.getElementById('licenseDetails');
+        const clientEl = document.getElementById('licenseClient');
+        const expiryEl = document.getElementById('licenseExpiry');
+        const statusEl = document.getElementById('licenseStatus');
+
+        if (data.existe) {
+          detailsEl.style.display = 'block';
+          clientEl.textContent = data.cliente || '-';
+          expiryEl.textContent = data.expira || '-';
+          statusEl.textContent = data.mensaje || 'Inválida';
+        }
+
+        if (data.mensaje) {
+          messageEl.textContent = data.mensaje;
+        }
+      })
+      .catch(error => {
+        console.error('Error al obtener información de licencia:', error);
+      });
+  </script>
+</body>
+</html>

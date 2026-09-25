@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Clientes - POS Sistema</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <header class="app-header">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <img src="img/logo.jpeg" alt="Mundo Tech Logo" style="height: 36px; width: auto;">
+      <h1>Mundo Tech - Admin Clientes</h1>
+    </div>
+  </header>
+
+  <main class="app-layout">
+
+    <!-- SIDEBAR DE NAVEGACIÓN -->
+    <nav class="app-sidebar" id="sidebar-container">
+      <!-- El sidebar se genera dinámicamente según el rol del usuario -->
+    </nav>
+
+    <!-- PANEL PRINCIPAL: lista de clientes -->
+    <section class="panel-catalogo">
+      <!-- BARRA DE BÚSQUEDA Y BOTÓN AGREGAR -->
+      <div class="barra-busqueda">
+        <div class="input-busqueda">
+          <i class="bi bi-search"></i>
+          <input type="text" id="buscar-cliente" placeholder="Buscar por nombre...">
+        </div>
+        <button class="btn-agregar" id="btn-agregar-cliente">
+          <i class="bi bi-plus-lg"></i> Agregar cliente
+        </button>
+      </div>
+
+      <!-- TABLA DE CLIENTES -->
+      <div class="tabla-productos-container">
+        <table class="tabla-productos">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Teléfono</th>
+              <th>Email</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-clientes-body">
+            <!-- Los clientes se insertan aquí por JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL FORMULARIO AGREGAR/EDITAR -->
+  <div class="modal" id="modal-cliente">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-cliente-titulo">Agregar cliente</h2>
+        <button class="modal-close" id="modal-cliente-close">&times;</button>
+      </div>
+      <form id="form-cliente" class="modal-body">
+        <input type="hidden" id="cliente-id">
+        
+        <div class="form-group">
+          <label for="cliente-nombre">Nombre *</label>
+          <input type="text" id="cliente-nombre" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="cliente-telefono">Teléfono</label>
+          <input type="text" id="cliente-telefono">
+        </div>
+        
+        <div class="form-group">
+          <label for="cliente-email">Email</label>
+          <input type="email" id="cliente-email">
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn-cancelar" id="btn-cancelar-cliente">Cancelar</button>
+          <button type="submit" class="btn-guardar">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/admin-clientes.js"></script>
+  <script src="js/cierre-caja.js"></script>
+</body>
+</html>

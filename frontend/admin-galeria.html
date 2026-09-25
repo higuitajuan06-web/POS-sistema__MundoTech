@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería - Mundo Tech</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/galeria.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="marca-header"><img src="img/logo.jpeg" alt="Mundo Tech Logo"><h1>Mundo Tech - Galería</h1></div>
+  </header>
+  <main class="app-layout">
+    <nav class="app-sidebar" id="sidebar-container"></nav>
+    <section class="panel-catalogo">
+      <div class="barra-busqueda"><button class="btn-agregar" id="btn-agregar-galeria"><i class="bi bi-plus-lg"></i> Agregar diseño</button></div>
+      <div class="tabla-productos-container">
+        <table class="tabla-productos">
+          <thead><tr><th>Imagen</th><th>Título</th><th>Categoría</th><th>Producto</th><th>Acciones</th></tr></thead>
+          <tbody id="tabla-galeria-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <div class="modal" id="modal-galeria">
+    <div class="modal-content">
+      <div class="modal-header"><h2 id="modal-galeria-titulo">Agregar diseño</h2><button class="modal-close" id="modal-galeria-close">&times;</button></div>
+      <form id="form-galeria" class="modal-body">
+        <input type="hidden" id="galeria-id">
+        <div class="form-group"><label for="galeria-titulo">Título *</label><input id="galeria-titulo" maxlength="150" required></div>
+        <div class="form-group"><label for="galeria-descripcion">Descripción</label><textarea id="galeria-descripcion" rows="3"></textarea></div>
+        <div class="form-group"><label for="galeria-imagen">Imagen *</label><input type="file" id="galeria-imagen" accept="image/*"><div id="galeria-preview" class="imagen-preview"></div></div>
+        <div class="form-group"><label for="galeria-categoria">Categoría</label><select id="galeria-categoria"><option value="">Sin categoría</option></select></div>
+        <div class="form-group"><label for="galeria-producto">Producto vinculado</label><select id="galeria-producto"><option value="">Ninguno</option></select></div>
+        <div class="modal-footer"><button type="button" class="btn-cancelar" id="btn-cancelar-galeria">Cancelar</button><button type="submit" class="btn-guardar">Guardar</button></div>
+      </form>
+    </div>
+  </div>
+  <script src="js/api.js"></script><script src="js/sidebar.js"></script><script src="js/admin-galeria.js"></script><script src="js/cierre-caja.js"></script>
+</body>
+</html>

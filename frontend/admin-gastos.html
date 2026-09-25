@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gastos - POS Sistema</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <img src="/img/logo.jpeg" alt="Mundo Tech Logo" style="height: 36px; width: auto;">
+      <h1>Mundo Tech - Gastos</h1>
+    </div>
+  </header>
+
+  <main class="app-layout">
+    <nav class="app-sidebar" id="sidebar-container"></nav>
+    <section class="panel-catalogo">
+      <div class="barra-busqueda">
+        <div class="filtros-fecha">
+          <div class="filtro-grupo">
+            <label for="fecha-desde">Desde:</label>
+            <input type="date" id="fecha-desde">
+          </div>
+          <div class="filtro-grupo">
+            <label for="fecha-hasta">Hasta:</label>
+            <input type="date" id="fecha-hasta">
+          </div>
+          <div class="filtro-grupo">
+            <label for="filtro-estado">Estado:</label>
+            <select id="filtro-estado">
+              <option value="">Todos los estados</option>
+              <option value="PENDIENTE">Pendiente</option>
+              <option value="PAGADO">Pagado</option>
+            </select>
+          </div>
+          <button id="btn-filtrar" class="btn-filtrar"><i class="bi bi-funnel"></i> Filtrar</button>
+          <div class="botones-rapidos-inline">
+            <button class="btn-rapido" data-periodo="hoy"><i class="bi bi-calendar-day"></i> Hoy</button>
+            <button class="btn-rapido" data-periodo="ayer"><i class="bi bi-calendar-minus"></i> Ayer</button>
+            <button class="btn-rapido" data-periodo="ultimos7"><i class="bi bi-calendar-week"></i> Últimos 7 días</button>
+            <button class="btn-rapido" data-periodo="este-mes"><i class="bi bi-calendar-month"></i> Este mes</button>
+            <button class="btn-rapido btn-limpiar" data-periodo="limpiar"><i class="bi bi-x-circle"></i> Limpiar</button>
+          </div>
+        </div>
+        <button class="btn-agregar" id="btn-agregar-gasto"><i class="bi bi-plus-lg"></i> Nuevo gasto</button>
+      </div>
+
+      <div class="tabla-productos-container">
+        <table class="tabla-productos">
+          <thead>
+            <tr>
+              <th>Concepto</th>
+              <th>Monto</th>
+              <th>Fecha</th>
+              <th>Categoría</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-gastos-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="modal-gasto">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-gasto-titulo">Nuevo gasto</h2>
+        <button class="modal-close" id="modal-gasto-close">&times;</button>
+      </div>
+      <form id="form-gasto" class="modal-body">
+        <input type="hidden" id="gasto-id">
+        <div class="form-group">
+          <label for="gasto-concepto">Concepto *</label>
+          <input type="text" id="gasto-concepto" maxlength="150" required>
+        </div>
+        <div class="form-group">
+          <label for="gasto-monto">Monto *</label>
+          <input type="number" id="gasto-monto" min="0.01" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label for="gasto-fecha">Fecha *</label>
+          <input type="date" id="gasto-fecha" required>
+        </div>
+        <div class="form-group">
+          <label for="gasto-categoria">Categoría</label>
+          <input type="text" id="gasto-categoria" maxlength="50" placeholder="Luz, gas, proveedores...">
+        </div>
+        <div class="form-group">
+          <label for="gasto-estado">Estado *</label>
+          <select id="gasto-estado" required>
+            <option value="PENDIENTE">Pendiente</option>
+            <option value="PAGADO">Pagado</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="gasto-nota">Nota</label>
+          <textarea id="gasto-nota" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-cancelar" id="btn-cancelar-gasto">Cancelar</button>
+          <button type="submit" class="btn-guardar">Guardar gasto</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/admin-gastos.js"></script>
+</body>
+</html>

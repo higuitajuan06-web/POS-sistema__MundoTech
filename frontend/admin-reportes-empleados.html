@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reportes de Empleados - Mundo Tech</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <header class="app-header">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <img src="img/logo.jpeg" alt="Mundo Tech Logo" style="height: 36px; width: auto;">
+      <h1>Mundo Tech</h1>
+    </div>
+  </header>
+
+  <main class="app-layout">
+
+    <!-- SIDEBAR DE NAVEGACIÓN -->
+    <nav class="app-sidebar" id="sidebar-container">
+      <!-- El sidebar se genera dinámicamente según el rol del usuario -->
+    </nav>
+
+    <!-- PANEL PRINCIPAL: Reportes de empleados -->
+    <section class="panel-historial">
+      
+      <!-- TOTAL GENERAL -->
+      <div class="resumen-ventas">
+        <h2 id="total-general-texto">Cargando...</h2>
+      </div>
+
+      <!-- FILTROS DE FECHA -->
+      <div class="filtros-fecha">
+        <div class="filtro-grupo">
+          <label for="fecha-desde">Desde:</label>
+          <input type="date" id="fecha-desde">
+        </div>
+        <div class="filtro-grupo">
+          <label for="fecha-hasta">Hasta:</label>
+          <input type="date" id="fecha-hasta">
+        </div>
+        <button id="btn-filtrar" class="btn-filtrar">
+          <i class="bi bi-funnel"></i>
+          Filtrar
+        </button>
+        <div class="botones-rapidos-inline">
+          <button class="btn-rapido" data-periodo="hoy">
+            <i class="bi bi-calendar-day"></i>
+            Hoy
+          </button>
+          <button class="btn-rapido" data-periodo="ayer">
+            <i class="bi bi-calendar-minus"></i>
+            Ayer
+          </button>
+          <button class="btn-rapido" data-periodo="ultimos7">
+            <i class="bi bi-calendar-week"></i>
+            Últimos 7 días
+          </button>
+          <button class="btn-rapido" data-periodo="este-mes">
+            <i class="bi bi-calendar-month"></i>
+            Este mes
+          </button>
+          <button class="btn-rapido btn-limpiar" data-periodo="limpiar">
+            <i class="bi bi-x-circle"></i>
+            Limpiar
+          </button>
+        </div>
+      </div>
+
+      <!-- TARJETAS DE EMPLEADOS -->
+      <div class="empleados-grid" id="empleados-grid">
+        <!-- Las tarjetas se insertan aquí por JS -->
+      </div>
+      
+      <div id="mensaje-vacio" class="mensaje-vacio" style="display: none;">
+        <i class="bi bi-inbox"></i>
+        <p>No hay ventas en el período seleccionado</p>
+      </div>
+
+      <div class="resumen-ventas">
+        <h2>Comisiones del período</h2>
+        <p id="total-comisiones-texto">Cargando...</p>
+      </div>
+      <div class="empleados-grid" id="comisiones-grid"></div>
+      <div id="mensaje-comisiones-vacio" class="mensaje-vacio" style="display: none;">
+        <i class="bi bi-inbox"></i>
+        <p>No hay comisiones en el período seleccionado</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/admin-reportes-empleados.js"></script>
+  <script src="js/cierre-caja.js"></script>
+</body>
+</html>

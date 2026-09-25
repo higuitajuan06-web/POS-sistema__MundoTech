@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citas - POS Sistema</title>
+  <link rel="stylesheet" href="/css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <header class="app-header">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <img src="/img/logo.jpeg" alt="Mundo Tech Logo" style="height: 36px; width: auto;">
+      <h1>Mundo Tech - Citas</h1>
+    </div>
+  </header>
+
+  <main class="app-layout">
+
+    <!-- SIDEBAR DE NAVEGACIÓN -->
+    <nav class="app-sidebar" id="sidebar-container">
+      <!-- El sidebar se genera dinámicamente según el rol del usuario -->
+    </nav>
+
+    <!-- PANEL PRINCIPAL: lista de citas -->
+    <section class="panel-catalogo">
+      <!-- BARRA DE FILTROS Y BOTÓN AGREGAR -->
+      <div class="barra-busqueda">
+        <div class="filtros-fecha">
+          <div class="filtro-grupo">
+            <label for="fecha-desde">Desde:</label>
+            <input type="date" id="fecha-desde">
+          </div>
+          <div class="filtro-grupo">
+            <label for="fecha-hasta">Hasta:</label>
+            <input type="date" id="fecha-hasta">
+          </div>
+          <div class="filtro-grupo">
+            <label for="filtro-estado">Estado:</label>
+            <select id="filtro-estado">
+              <option value="">Todos los estados</option>
+              <option value="PENDIENTE">Pendiente</option>
+              <option value="CONFIRMADA">Confirmada</option>
+              <option value="COMPLETADA">Completada</option>
+              <option value="CANCELADA">Cancelada</option>
+              <option value="NO_ASISTIO">No asistió</option>
+            </select>
+          </div>
+          <button id="btn-filtrar" class="btn-filtrar">
+            <i class="bi bi-funnel"></i>
+            Filtrar
+          </button>
+          <div class="botones-rapidos-inline">
+            <button class="btn-rapido" data-periodo="hoy">
+              <i class="bi bi-calendar-day"></i>
+              Hoy
+            </button>
+            <button class="btn-rapido" data-periodo="ayer">
+              <i class="bi bi-calendar-minus"></i>
+              Ayer
+            </button>
+            <button class="btn-rapido" data-periodo="ultimos7">
+              <i class="bi bi-calendar-week"></i>
+              Últimos 7 días
+            </button>
+            <button class="btn-rapido" data-periodo="este-mes">
+              <i class="bi bi-calendar-month"></i>
+              Este mes
+            </button>
+            <button class="btn-rapido btn-limpiar" data-periodo="limpiar">
+              <i class="bi bi-x-circle"></i>
+              Limpiar
+            </button>
+          </div>
+        </div>
+        <button class="btn-agregar" id="btn-agregar-cita">
+          <i class="bi bi-plus-lg"></i> Nueva cita
+        </button>
+      </div>
+
+      <!-- TABLA DE CITAS -->
+      <div class="tabla-productos-container">
+        <table class="tabla-productos">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Cliente</th>
+              <th>Teléfono</th>
+              <th>Servicio</th>
+              <th>Precio</th>
+              <th>Anticipo</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-citas-body">
+            <!-- Las citas se insertan aquí por JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL FORMULARIO AGREGAR/EDITAR -->
+  <div class="modal" id="modal-cita">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-cita-titulo">Nueva cita</h2>
+        <button class="modal-close" id="modal-cita-close">&times;</button>
+      </div>
+      <form id="form-cita" class="modal-body">
+        <input type="hidden" id="cita-id">
+
+        <div class="form-group">
+          <label for="cita-cliente">Cliente *</label>
+          <select id="cita-cliente" required>
+            <option value="">Seleccionar cliente...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="cita-fecha">Fecha *</label>
+          <input type="date" id="cita-fecha" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cita-hora">Hora *</label>
+          <input type="time" id="cita-hora" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cita-servicio">Servicio/Motivo *</label>
+          <input type="text" id="cita-servicio" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cita-precio">Precio</label>
+          <input type="number" id="cita-precio" step="0.01" min="0" placeholder="0.00">
+        </div>
+
+        <div class="form-group">
+          <label for="cita-anticipo">Anticipo (opcional)</label>
+          <input type="number" id="cita-anticipo" step="0.01" min="0" placeholder="0.00">
+        </div>
+
+        <div class="form-group" id="grupo-metodo-anticipo" style="display: none;">
+          <label for="cita-metodo-anticipo">Método de pago del anticipo *</label>
+          <select id="cita-metodo-anticipo">
+            <option value="">Seleccionar método...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="cita-telefono">Teléfono del cliente</label>
+          <input type="text" id="cita-telefono" placeholder="Número de teléfono">
+        </div>
+
+        <div class="form-group">
+          <label for="cita-notas">Notas</label>
+          <textarea id="cita-notas" rows="3"></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-cancelar" id="btn-cancelar-cita">Cancelar</button>
+          <button type="submit" class="btn-guardar">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL CONVERTIR CITA EN VENTA -->
+  <div class="modal" id="modal-convertir-venta">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Convertir cita en venta</h2>
+        <button class="modal-close" id="modal-convertir-close">&times;</button>
+      </div>
+      <form id="form-convertir-venta" class="modal-body">
+        <input type="hidden" id="convertir-cita-id">
+
+        <div class="form-group">
+          <label>Cliente</label>
+          <input type="text" id="convertir-cliente" readonly>
+        </div>
+
+        <div class="form-group">
+          <label>Servicio original</label>
+          <input type="text" id="convertir-servicio" readonly>
+        </div>
+
+        <div class="form-group" id="info-anticipo" style="display: none;">
+          <label>Anticipo ya pagado</label>
+          <input type="text" id="convertir-anticipo" readonly style="color: #16a34a; font-weight: bold;">
+        </div>
+
+        <div class="form-group">
+          <label for="convertir-producto">Producto a vender *</label>
+          <select id="convertir-producto" required>
+            <option value="">Seleccionar producto...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="convertir-cantidad">Cantidad *</label>
+          <input type="number" id="convertir-cantidad" min="1" value="1" required>
+        </div>
+
+        <div class="form-group">
+          <label>Total del producto</label>
+          <input type="number" id="convertir-total-producto" step="0.01" min="0">
+        </div>
+
+        <div class="form-group" id="info-saldo-pendiente" style="display: none;">
+          <label>Saldo pendiente a cobrar</label>
+          <input type="number" id="convertir-saldo" step="0.01" min="0" style="color: #dc2626; font-weight: bold;">
+        </div>
+
+        <div class="form-group">
+          <label>Teléfono del cliente</label>
+          <input type="text" id="convertir-telefono" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="convertir-metodo-pago">Método de pago para el saldo *</label>
+          <select id="convertir-metodo-pago" required>
+            <option value="">Seleccionar método...</option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-cancelar" id="btn-cancelar-convertir">Cancelar</button>
+          <button type="submit" class="btn-guardar">Convertir y cobrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/sidebar.js"></script>
+  <script src="/js/citas.js"></script>
+  <script src="/js/cierre-caja.js"></script>
+</body>
+</html>

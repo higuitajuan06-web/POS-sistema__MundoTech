@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POS Sistema</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <header class="app-header">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <img src="img/logo.jpeg" alt="Mundo Tech Logo" style="height: 36px; width: auto;">
+      <h1>Mundo Tech</h1>
+    </div>
+  </header>
+
+  <main class="app-layout">
+
+    <!-- SIDEBAR DE NAVEGACIÓN -->
+    <nav class="app-sidebar" id="sidebar-container">
+      <!-- El sidebar se genera dinámicamente según el rol del usuario -->
+    </nav>
+
+    <!-- PANEL IZQUIERDO: catálogo -->
+    <section class="panel-catalogo">
+      <!-- INPUT DE ESCÁNER DE CÓDIGO DE BARRAS -->
+      <div class="barra-escaner">
+        <div class="input-escaner">
+          <i class="bi bi-upc-scan"></i>
+          <input type="text" id="input-escaner-venta" placeholder="Escanear código de barras para agregar al carrito...">
+        </div>
+      </div>
+
+      <!-- TÍTULO + CARRUSEL DE CATEGORÍAS -->
+      <h3 class="titulo-categorias">Choose Category</h3>
+      <div class="categorias" id="lista-categorias">
+        <!-- Las categorías se insertan aquí por JS -->
+      </div>
+
+      <!-- GRID DE PRODUCTOS -->
+      <div class="productos-grid" id="lista-productos">
+        <!-- Los productos se insertan aquí por JS -->
+      </div>
+    </section>
+
+    <!-- PANEL DERECHO: carrito / cobro -->
+    <aside class="panel-carrito">
+      <h2>Cuenta actual</h2>
+
+      <div class="carrito-items" id="carrito-items">
+        <p class="carrito-vacio">Agrega productos para iniciar la venta</p>
+      </div>
+
+      <div class="carrito-resumen">
+        <div class="fila-total">
+          <span>Total</span>
+          <span id="carrito-total">$0</span>
+        </div>
+      </div>
+
+      <div class="metodos-pago">
+        <button class="metodo-pago-btn" data-metodo="CASH">
+          <i class="bi bi-cash-stack"></i> Efectivo
+        </button>
+        <button class="metodo-pago-btn" data-metodo="CARD">
+          <i class="bi bi-credit-card"></i> Tarjeta
+        </button>
+        <button class="metodo-pago-btn" data-metodo="TRANSFER">
+          <i class="bi bi-bank"></i> Transferencia
+        </button>
+      </div>
+
+      <button class="btn-cobrar" id="btn-cobrar" disabled>Cobrar</button>
+    </aside>
+
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cierre-caja.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+.marca-header, .kiosco-header { display: flex; align-items: center; gap: 12px; }
+.marca-header img, .kiosco-header img { height: 36px; width: auto; }
+.tabla-productos td .producto-imagen-mini { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; }
+.form-group textarea { width: 100%; padding: 10px; border: 1px solid var(--color-borde); border-radius: var(--radio); resize: vertical; font: inherit; }
+.kiosco-body { min-height: 100vh; background: #f4f5f7; max-width: 100%; overflow-x: hidden; }
+.kiosco-header { justify-content: center; padding: 24px; background: white; border-bottom: 1px solid var(--color-borde); }
+.kiosco-header h1 { color: var(--color-primario); font-size: clamp(24px, 4vw, 34px); }
+.kiosco-main { max-width: 1400px; margin: 0 auto; padding: 28px 5%; overflow-x: hidden; }
+.kiosco-main > h2 { text-align: center; color: var(--color-primario); font-size: clamp(24px, 4vw, 38px); margin-bottom: 28px; }
+.kiosco-main .titulo-categorias { font-size: 22px; }
+.kiosco-main .categoria-btn { min-height: 58px; font-size: 16px; padding: 16px 24px; }
+.galeria-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+.galeria-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 3px 12px rgba(0,0,0,.12); cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.galeria-card:active { transform: scale(.98); }
+.galeria-card img { display: block; width: 100%; height: clamp(260px, 30vw, 420px); object-fit: cover; }
+.galeria-card div { padding: 18px 20px 22px; }
+.galeria-card h3 { font-size: 22px; color: var(--color-primario); margin-bottom: 8px; }
+.galeria-card p { color: var(--color-acento-oscuro); font-size: 18px; font-weight: 600; }
+.kiosco-empty, .kiosco-error { grid-column: 1 / -1; text-align: center; padding: 48px; color: var(--color-texto-suave); font-size: 20px; }
+.gallery-modal { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.75); padding: 20px; align-items: center; justify-content: center; }
+.gallery-modal.active { display: flex; }
+.gallery-modal-content { position: relative; background: white; border-radius: 16px; padding: 24px; width: min(90vw, 900px); max-width: calc(100vw - 24px); max-height: 95vh; overflow: auto; text-align: center; }
+.gallery-modal-content img { max-width: 100%; max-height: 65vh; object-fit: contain; border-radius: 10px; }
+.gallery-modal-content h2 { color: var(--color-primario); font-size: 28px; margin: 16px 0 8px; }
+.gallery-modal-content p { font-size: 18px; margin-bottom: 10px; }
+.gallery-modal-content strong { color: var(--color-acento-oscuro); font-size: 21px; }
+.gallery-modal-close { position: absolute; top: 8px; right: 12px; width: 48px; height: 48px; border: 0; border-radius: 50%; background: rgba(255,255,255,.9); color: var(--color-primario); font-size: 34px; cursor: pointer; }
+@media (min-width: 768px) { .kiosco-main { padding-top: 40px; } .galeria-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1200px) { .galeria-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

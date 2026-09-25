@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - POS Sistema</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <header class="app-header">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <img src="img/logo.jpeg" alt="Mundo Tech Logo" style="height: 36px; width: auto;">
+      <h1>Mundo Tech - Dashboard</h1>
+    </div>
+    <button class="btn-actualizaciones" id="btn-buscar-actualizaciones" style="display: none;">
+      <i class="bi bi-cloud-download"></i> Buscar actualizaciones
+    </button>
+  </header>
+
+  <main class="app-layout">
+
+    <!-- SIDEBAR DE NAVEGACIÓN -->
+    <nav class="app-sidebar" id="sidebar-container">
+      <!-- El sidebar se genera dinámicamente según el rol del usuario -->
+    </nav>
+
+    <!-- PANEL PRINCIPAL: dashboard -->
+    <section class="panel-catalogo">
+      <!-- TARJETAS DE RESUMEN -->
+      <div class="resumen-bodega">
+        <div class="resumen-card">
+          <i class="bi bi-calendar-check"></i>
+          <div class="resumen-info">
+            <span class="resumen-label">Hoy</span>
+            <span class="resumen-valor" id="resumen-hoy-total">$0</span>
+            <span class="resumen-label" id="resumen-hoy-transacciones">0 transacciones</span>
+          </div>
+        </div>
+        <div class="resumen-card">
+          <i class="bi bi-calendar-week"></i>
+          <div class="resumen-info">
+            <span class="resumen-label">Esta semana</span>
+            <span class="resumen-valor" id="resumen-semana-total">$0</span>
+            <span class="resumen-label" id="resumen-semana-transacciones">0 transacciones</span>
+          </div>
+        </div>
+        <div class="resumen-card">
+          <i class="bi bi-calendar-month"></i>
+          <div class="resumen-info">
+            <span class="resumen-label">Este mes</span>
+            <span class="resumen-valor" id="resumen-mes-total">$0</span>
+            <span class="resumen-label" id="resumen-mes-transacciones">0 transacciones</span>
+          </div>
+        </div>
+        <div class="resumen-card">
+          <i class="bi bi-receipt"></i>
+          <div class="resumen-info">
+            <span class="resumen-label">Deudas pendientes</span>
+            <span class="resumen-valor" id="resumen-gastos-pendientes">$0</span>
+            <span class="resumen-label">Gastos por pagar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRÁFICA DE ÚLTIMOS 7 DÍAS -->
+      <div class="dashboard-grafica-container">
+        <h3 class="dashboard-titulo">Ventas últimos 7 días</h3>
+        <div class="dashboard-grafica">
+          <canvas id="grafica-7-dias"></canvas>
+        </div>
+      </div>
+
+      <!-- PRODUCTO MÁS VENDIDO -->
+      <div class="dashboard-producto-mas-vendido">
+        <h3 class="dashboard-titulo">Producto más vendido (últimos 30 días)</h3>
+        <div class="producto-mas-vendido-card">
+          <i class="bi bi-trophy"></i>
+          <div class="producto-mas-vendido-info">
+            <span class="producto-mas-vendido-nombre" id="producto-mas-vendido-nombre">Cargando...</span>
+            <span class="producto-mas-vendido-cantidad" id="producto-mas-vendido-cantidad">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- WIDGETS OPERATIVOS -->
+      <div class="dashboard-widgets">
+        <article class="dashboard-widget">
+          <h3 class="dashboard-titulo">Citas de hoy</h3>
+          <p class="dashboard-widget-contador" id="citas-hoy-contador">Cargando...</p>
+          <div class="dashboard-widget-lista" id="citas-hoy-lista"></div>
+        </article>
+
+        <article class="dashboard-widget">
+          <h3 class="dashboard-titulo">Anticipos recientes</h3>
+          <p class="dashboard-widget-contador" id="anticipos-contador">Cargando...</p>
+          <div class="dashboard-widget-lista" id="anticipos-lista"></div>
+        </article>
+
+        <article class="dashboard-widget">
+          <h3 class="dashboard-titulo">Stock bajo</h3>
+          <p class="dashboard-widget-contador" id="stock-bajo-contador">Cargando...</p>
+          <div class="dashboard-widget-lista" id="stock-bajo-lista"></div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/cierre-caja.js"></script>
+</body>
+</html>
